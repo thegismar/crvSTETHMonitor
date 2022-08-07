@@ -13,5 +13,8 @@ display_data.py is designed to be run to display the data in a graph and table.
 
 You  probably need to create a Brownie environment in the folder where you run this (brownie init --force), I'm not 100% sure.
 
+### Oh, you can also set it to automatically **claim** your LDO reward tokens should both conditions be met: minimum $value of tokens, maximum gas price.
+The idea here isn't to dump those and somehow reinvest them (which is a silly thing to do), but to take advantage of low gas prices and be able to sell the LDO tokens
+when you think they're at a high. Again, it's **OPTIONAL**.
 
 ![alt text](https://i.imgur.com/AZyYei8.png)
