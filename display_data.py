@@ -9,6 +9,7 @@ app.title = "Curve staked ETH/stETH pool monitor"
 def serve_layout():
     # Load the data.
     df = pd.read_csv('data.csv', index_col=False)
+    df.sort_values(by='timestamp', ascending=False, inplace=True)
     fig = go.Figure(data=[go.Scatter(x=df.date, y=df.net_value)])
 
     # Render the layout.
