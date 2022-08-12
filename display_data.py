@@ -1,6 +1,7 @@
 from dash import Dash, dash_table, dcc, html
 import pandas as pd
 import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 
 app = Dash(__name__)
 app.title = "Curve staked ETH/stETH pool monitor"
@@ -10,8 +11,17 @@ def serve_layout():
     # Load the data.
     df = pd.read_csv('data.csv', index_col=False)
     df.sort_values(by='timestamp', ascending=False, inplace=True)
-    fig = go.Figure(data=[go.Scatter(x=df.date, y=df.net_value)])
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
 
+    fig.add_trace(
+        go.Scatter(x=df.date, y=df.net_value, name="net value"),
+        secondary_y=False,
+    )
+
+    fig.add_trace(
+        go.Scatter(x=df.date, y=df.eth_tokens, name="eth tokens"),
+        secondary_y=True,
+    )
     # Render the layout.
 
     return html.Div(children=[
@@ -19,7 +29,7 @@ def serve_layout():
         html.H1(children='Curve staked ETH/stETH pool monitor'),
 
         html.Div(children='''
-        x-axis: time, y-axis net worth including lido interest.
+        x-axis: time, y-axis 1 net worth including lido interest, y-axis 2 total amount of eth that can be withdrawn
     '''),
 
         dcc.Graph(figure=fig),
