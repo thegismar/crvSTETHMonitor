@@ -22,6 +22,12 @@ def serve_layout():
         go.Scatter(x=df.date, y=df.eth_tokens, name="eth tokens"),
         secondary_y=True,
     )
+
+    fig.add_trace(
+        go.Scatter(x=df.date, y=df.steth_tokens, name="steth tokens"),
+        secondary_y=True,
+    )
+
     # Render the layout.
 
     return html.Div(children=[
