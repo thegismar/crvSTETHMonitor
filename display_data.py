@@ -28,6 +28,11 @@ def serve_layout():
         secondary_y=True,
     )
 
+    fig.add_trace(
+        go.Scatter(x=df.date, y=df.pool_tokens, name="curve tokens"),
+        secondary_y=True,
+    )
+
     # Render the layout.
 
     return html.Div(children=[

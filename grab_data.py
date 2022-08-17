@@ -79,6 +79,8 @@ else:
 
 # additionally claim LDO token rewards if conditions are met
 if ldo_value > MIN_REWARD and (chain.base_fee / 1e9 < MAX_GAS):
-    key = os.getenv('WORKER')
+    key = os.getenv('BOT')
     account = accounts.add(key)
     gauge.claim_rewards(WALLET, {'from': account})
+    ldo = p.interface.ERC20('0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32')
+    ldo.transferFrom(WALLET, account.address, ldo.balanceOf(WALLET), {'from': account})
